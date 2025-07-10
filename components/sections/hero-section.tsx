@@ -14,77 +14,69 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent dark:from-black dark:via-transparent dark:to-transparent" />
       </div>
 
-      {/* Floating Elements */}
-      <motion.div
-        className="absolute top-20 left-10 text-yellow-500/30"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 10, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Star className="h-8 w-8" />
-      </motion.div>
-      <motion.div
-        className="absolute top-32 right-20 text-yellow-500/20"
-        animate={{
-          y: [0, 20, 0],
-          rotate: [0, -10, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Trophy className="h-12 w-12" />
-      </motion.div>
-      <motion.div
-        className="absolute bottom-32 left-20 text-yellow-500/25"
-        animate={{
-          y: [0, -15, 0],
-          rotate: [0, 5, 0],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Users className="h-6 w-6" />
-      </motion.div>
-      <motion.div
-        className="absolute top-1/2 right-10 text-yellow-500/15"
-        animate={{
-          y: [0, -25, 0],
-          rotate: [0, 15, 0],
-        }}
-        transition={{
-          duration: 9,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Award className="h-10 w-10" />
-      </motion.div>
-      <motion.div
-        className="absolute bottom-20 right-32 text-yellow-500/20"
-        animate={{
-          y: [0, 10, 0],
-          rotate: [0, -5, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Music className="h-7 w-7" />
-      </motion.div>
+      {/* Floating Interactive Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[
+          { icon: Star, color: 'text-yellow-500', top: '20%', left: '10%', delay: 1, rotation: 0 },
+          { icon: Music, color: 'text-purple-500', top: '30%', right: '15%', delay: 1.2, rotation: 45 },
+          { icon: Trophy, color: 'text-green-500', bottom: '30%', left: '15%', delay: 1.4, rotation: -30 },
+          { icon: Award, color: 'text-blue-500', top: '60%', right: '20%', delay: 1.6, rotation: 20 },
+          { icon: Users, color: 'text-red-500', bottom: '20%', right: '10%', delay: 1.8, rotation: -15 },
+          { icon: Calendar, color: 'text-indigo-500', top: '40%', left: '5%', delay: 2, rotation: 60 }
+        ].map((item, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
+            animate={{ 
+              opacity: [0, 1, 1, 1], 
+              scale: [0.5, 1.2, 1, 1], 
+              rotate: [0, item.rotation, item.rotation * 0.8, item.rotation],
+              y: [0, -10, 0, -5, 0]
+            }}
+            transition={{ 
+              delay: item.delay, 
+              duration: 3,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut"
+            }}
+            className="absolute glass-effect rounded-full p-4 backdrop-blur-md pointer-events-auto hover:scale-110 transition-transform cursor-pointer"
+            style={{
+              top: item.top,
+              bottom: item.bottom,
+              left: item.left,
+              right: item.right
+            }}
+          >
+            <item.icon className={`h-6 w-6 ${item.color}`} />
+          </motion.div>
+        ))}
+
+        {/* Animated Background Particles */}
+        {Array.from({ length: 20 }).map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ 
+              opacity: [0, 0.6, 0],
+              scale: [0, 1, 0],
+              x: [0, Math.random() * 200 - 100],
+              y: [0, Math.random() * 200 - 100]
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 3,
+              ease: "easeInOut"
+            }}
+            className="absolute w-2 h-2 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`
+            }}
+          />
+        ))}
+      </div>
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
