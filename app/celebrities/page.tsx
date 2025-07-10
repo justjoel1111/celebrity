@@ -1,146 +1,87 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, Filter, Star, Music, Film, Tv, Users, Calendar, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ApiService } from '@/lib/api';
 import Link from 'next/link';
 
 export default function CelebritiesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedGenre, setSelectedGenre] = useState('all');
+  const [celebrities, setCelebrities] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const celebrities = [
-    {
-      id: 1,
-      name: 'Taylor Swift',
-      slug: 'taylor-swift',
-      category: 'Music',
-      genre: 'Pop',
-      image: 'https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop',
-      rating: 4.9,
-      price: '$500K+',
-      verified: true,
-      availability: 'Available',
-      tags: ['Pop', 'Concert', 'Awards'],
-      description: 'Global superstar with 200+ million albums sold worldwide',
-      followers: '89M',
-      events: 150,
-    },
-    {
-      id: 2,
-      name: 'Dwayne Johnson',
-      slug: 'dwayne-johnson',
-      category: 'Film',
-      genre: 'Action',
-      image: 'https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop',
-      rating: 4.8,
-      price: '$750K+',
-      verified: true,
-      availability: 'Limited',
-      tags: ['Action', 'Comedy', 'Speaking'],
-      description: 'Hollywood A-lister and highest-paid actor',
-      followers: '67M',
-      events: 89,
-    },
-    {
-      id: 3,
-      name: 'Oprah Winfrey',
-      slug: 'oprah-winfrey',
-      category: 'TV',
-      genre: 'Talk Show',
-      image: 'https://images.pexels.com/photos/1438084/pexels-photo-1438084.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop',
-      rating: 5.0,
-      price: '$1M+',
-      verified: true,
-      availability: 'Booked',
-      tags: ['Speaking', 'Inspiration', 'Media'],
-      description: 'Media mogul and inspirational speaker',
-      followers: '45M',
-      events: 234,
-    },
-    {
-      id: 4,
-      name: 'Ed Sheeran',
-      slug: 'ed-sheeran',
-      category: 'Music',
-      genre: 'Pop',
-      image: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop',
-      rating: 4.9,
-      price: '$400K+',
-      verified: true,
-      availability: 'Available',
-      tags: ['Pop', 'Acoustic', 'Songwriting'],
-      description: 'Singer-songwriter with billions of streams',
-      followers: '52M',
-      events: 178,
-    },
-    {
-      id: 5,
-      name: 'Emma Stone',
-      slug: 'emma-stone',
-      category: 'Film',
-      genre: 'Drama',
-      image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop',
-      rating: 4.7,
-      price: '$300K+',
-      verified: true,
-      availability: 'Available',
-      tags: ['Drama', 'Comedy', 'Awards'],
-      description: 'Academy Award-winning actress',
-      followers: '23M',
-      events: 67,
-    },
-    {
-      id: 6,
-      name: 'John Legend',
-      slug: 'john-legend',
-      category: 'Music',
-      genre: 'R&B',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop',
-      rating: 4.8,
-      price: '$350K+',
-      verified: true,
-      availability: 'Available',
-      tags: ['R&B', 'Soul', 'Piano'],
-      description: 'EGOT winner and Grammy-nominated artist',
-      followers: '34M',
-      events: 145,
-    },
-  ];
+  useEffect(() => {
+    loadData();
+  }, []);
 
-  const categories = [
-    { value: 'all', label: 'All Categories' },
-    { value: 'Music', label: 'Music' },
-    { value: 'Film', label: 'Film' },
-    { value: 'TV', label: 'TV' },
-    { value: 'Sports', label: 'Sports' },
-    { value: 'Comedy', label: 'Comedy' },
-  ];
+  const loadData = async () => {
+    try {
+      const [celebritiesData, categoriesData] = await Promise.all([
+        ApiService.getCelebrities(),
+        ApiService.getCategories()
+      ]);
+      
+      setCelebrities(celebritiesData);
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error('Error loading data:', error);
+      // Fallback data
+      setCelebrities([
+        {
+          id: '1',
+          name: 'Taylor Swift',
+          slug: 'taylor-swift',
+          categories: { name: 'Music', icon: 'Music', color: '#10B981' },
+          image_url: 'https://images.pexels.com/photos/1587927/pexels-photo-1587927.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop',
+          rating: 4.9,
+          price_range: '$500K+',
+          verified: true,
+          availability_status: 'available',
+          tags: ['Pop', 'Concert', 'Awards'],
+          description: 'Global superstar with 200+ million albums sold worldwide',
+          location: 'Nashville, TN'
+        },
+        {
+          id: '2',
+          name: 'Dwayne Johnson',
+          slug: 'dwayne-johnson',
+          categories: { name: 'Film', icon: 'Film', color: '#3B82F6' },
+          image_url: 'https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop',
+          rating: 4.8,
+          price_range: '$750K+',
+          verified: true,
+          availability_status: 'limited',
+          tags: ['Action', 'Comedy', 'Speaking'],
+          description: 'Hollywood A-lister and highest-paid actor',
+          location: 'Los Angeles, CA'
+        }
+      ]);
+      setCategories([
+        { id: '1', name: 'All Categories', slug: 'all' },
+        { id: '2', name: 'Music', slug: 'music' },
+        { id: '3', name: 'Film', slug: 'film' },
+        { id: '4', name: 'Television', slug: 'television' }
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const genres = [
-    { value: 'all', label: 'All Genres' },
-    { value: 'Pop', label: 'Pop' },
-    { value: 'Rock', label: 'Rock' },
-    { value: 'Hip-Hop', label: 'Hip-Hop' },
-    { value: 'R&B', label: 'R&B' },
-    { value: 'Action', label: 'Action' },
-    { value: 'Drama', label: 'Drama' },
-    { value: 'Comedy', label: 'Comedy' },
-  ];
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'Music':
+  const getCategoryIcon = (categoryName: string) => {
+    switch (categoryName?.toLowerCase()) {
+      case 'music':
         return Music;
-      case 'Film':
+      case 'film':
         return Film;
-      case 'TV':
+      case 'television':
         return Tv;
       default:
         return Star;
@@ -149,11 +90,11 @@ export default function CelebritiesPage() {
 
   const getAvailabilityColor = (availability: string) => {
     switch (availability) {
-      case 'Available':
+      case 'available':
         return 'bg-green-500';
-      case 'Limited':
+      case 'limited':
         return 'bg-yellow-500';
-      case 'Booked':
+      case 'booked':
         return 'bg-red-500';
       default:
         return 'bg-gray-500';
@@ -162,12 +103,42 @@ export default function CelebritiesPage() {
 
   const filteredCelebrities = celebrities.filter(celebrity => {
     const matchesSearch = celebrity.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         celebrity.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || celebrity.category === selectedCategory;
-    const matchesGenre = selectedGenre === 'all' || celebrity.genre === selectedGenre;
+                         celebrity.description?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || celebrity.categories?.slug === selectedCategory;
     
-    return matchesSearch && matchesCategory && matchesGenre;
+    return matchesSearch && matchesCategory;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black pt-16">
+        <section className="py-20 bg-gradient-to-br from-zinc-900 to-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <div className="animate-pulse">
+                <div className="h-12 bg-gray-300 dark:bg-zinc-700 rounded w-96 mx-auto mb-4"></div>
+                <div className="h-6 bg-gray-200 dark:bg-zinc-800 rounded w-128 mx-auto"></div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <Card key={i} className="luxury-card overflow-hidden">
+                  <div className="animate-pulse">
+                    <div className="h-64 bg-gray-300 dark:bg-zinc-700"></div>
+                    <div className="p-6 space-y-4">
+                      <div className="h-6 bg-gray-300 dark:bg-zinc-700 rounded"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-zinc-800 rounded"></div>
+                      <div className="h-10 bg-gray-300 dark:bg-zinc-700 rounded"></div>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black pt-16">
@@ -210,21 +181,10 @@ export default function CelebritiesPage() {
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
+                <SelectItem value="all">All Categories</SelectItem>
                 {categories.map(category => (
-                  <SelectItem key={category.value} value={category.value}>
-                    {category.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select value={selectedGenre} onValueChange={setSelectedGenre}>
-              <SelectTrigger className="w-full md:w-48 bg-white/10 border-white/20 text-white h-12">
-                <SelectValue placeholder="Genre" />
-              </SelectTrigger>
-              <SelectContent>
-                {genres.map(genre => (
-                  <SelectItem key={genre.value} value={genre.value}>
-                    {genre.label}
+                  <SelectItem key={category.id} value={category.slug}>
+                    {category.name}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -248,7 +208,7 @@ export default function CelebritiesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCelebrities.map((celebrity, index) => {
-              const CategoryIcon = getCategoryIcon(celebrity.category);
+              const CategoryIcon = getCategoryIcon(celebrity.categories?.name);
               return (
                 <motion.div
                   key={celebrity.id}
@@ -260,7 +220,7 @@ export default function CelebritiesPage() {
                     <CardHeader className="p-0">
                       <div className="relative">
                         <img
-                          src={celebrity.image}
+                          src={celebrity.image_url}
                           alt={celebrity.name}
                           className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                         />
@@ -273,11 +233,11 @@ export default function CelebritiesPage() {
                           )}
                           <Badge variant="secondary" className="bg-black/50 text-white">
                             <CategoryIcon className="h-3 w-3 mr-1" />
-                            {celebrity.category}
+                            {celebrity.categories?.name}
                           </Badge>
                         </div>
                         <div className="absolute top-4 right-4">
-                          <div className={`w-3 h-3 rounded-full ${getAvailabilityColor(celebrity.availability)}`} />
+                          <div className={`w-3 h-3 rounded-full ${getAvailabilityColor(celebrity.availability_status)}`} />
                         </div>
                         <div className="absolute bottom-4 right-4 flex items-center space-x-1 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1">
                           <Star className="h-4 w-4 text-yellow-500 fill-current" />
@@ -288,11 +248,11 @@ export default function CelebritiesPage() {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between mb-2">
                         <h3 className="text-xl font-semibold text-white">{celebrity.name}</h3>
-                        <span className="text-yellow-500 font-bold">{celebrity.price}</span>
+                        <span className="text-yellow-500 font-bold">{celebrity.price_range}</span>
                       </div>
                       <p className="text-gray-400 text-sm mb-4">{celebrity.description}</p>
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {celebrity.tags.map((tag, tagIndex) => (
+                        {celebrity.tags?.map((tag: string, tagIndex: number) => (
                           <Badge key={tagIndex} variant="outline" className="border-gray-600 text-gray-300">
                             {tag}
                           </Badge>
@@ -301,33 +261,31 @@ export default function CelebritiesPage() {
                       <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
                         <div className="flex items-center space-x-1">
                           <Users className="h-4 w-4" />
-                          <span>{celebrity.followers}</span>
+                          <span>{celebrity.location}</span>
                         </div>
                         <div className="flex items-center space-x-1">
-                          <Calendar className="h-4 w-4" />
-                          <span>{celebrity.events} events</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <div className={`w-2 h-2 rounded-full ${getAvailabilityColor(celebrity.availability)}`} />
-                          <span>{celebrity.availability}</span>
+                          <div className={`w-2 h-2 rounded-full ${getAvailabilityColor(celebrity.availability_status)}`} />
+                          <span className="capitalize">{celebrity.availability_status}</span>
                         </div>
                       </div>
                     </CardContent>
                     <CardFooter className="p-6 pt-0">
                       <div className="flex gap-2 w-full">
                         <Button 
+                          asChild
                           className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-black"
-                          disabled={celebrity.availability === 'Booked'}
+                          disabled={celebrity.availability_status === 'booked'}
                         >
-                          <Link href={`/celebrities/${celebrity.slug}`} className="flex items-center">
+                          <Link href={`/celebrities/${celebrity.slug}`} className="flex items-center justify-center">
                             View Profile
                             <ArrowRight className="ml-2 h-4 w-4" />
                           </Link>
                         </Button>
                         <Button 
+                          asChild
                           variant="outline" 
                           className="border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black"
-                          disabled={celebrity.availability === 'Booked'}
+                          disabled={celebrity.availability_status === 'booked'}
                         >
                           <Link href={`/booking?celebrity=${celebrity.slug}`}>
                             Book Now
@@ -355,7 +313,6 @@ export default function CelebritiesPage() {
                 onClick={() => {
                   setSearchTerm('');
                   setSelectedCategory('all');
-                  setSelectedGenre('all');
                 }}
                 className="bg-yellow-500 hover:bg-yellow-600 text-black"
               >
