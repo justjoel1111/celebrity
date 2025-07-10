@@ -29,7 +29,7 @@
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted-foreground: 0 0% 35.1%;
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
@@ -94,15 +94,15 @@
   }
   
   .glass-effect {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 dark:bg-white/10 dark:border-white/20;
+    @apply bg-white/80 backdrop-blur-md border border-gray-200/80 shadow-lg dark:bg-white/10 dark:border-white/20;
   }
   
   .glass-effect-light {
-    @apply bg-black/5 backdrop-blur-md border border-black/10 dark:bg-white/10 dark:border-white/20;
+    @apply bg-white/90 backdrop-blur-md border border-gray-200/50 shadow-md dark:bg-white/10 dark:border-white/20;
   }
   
   .luxury-card {
-    @apply bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-xl shadow-lg dark:from-zinc-900 dark:to-zinc-800 dark:border-zinc-700 dark:shadow-2xl transition-colors duration-300;
+    @apply bg-gradient-to-br from-white to-gray-50/50 border border-gray-200/80 rounded-xl shadow-xl dark:from-zinc-900 dark:to-zinc-800 dark:border-zinc-700 dark:shadow-2xl transition-all duration-300;
   }
   
   .premium-button {
@@ -114,7 +114,7 @@
   }
 
   .section-background {
-    @apply bg-gray-50 dark:bg-zinc-900 transition-colors duration-300;
+    @apply bg-gray-50/80 dark:bg-zinc-900 transition-colors duration-300;
   }
 
   .section-background-alt {
@@ -126,11 +126,39 @@
   }
 
   .text-secondary {
-    @apply text-gray-600 dark:text-gray-300 transition-colors duration-300;
+    @apply text-gray-700 dark:text-gray-300 transition-colors duration-300;
   }
 
   .text-muted {
-    @apply text-gray-500 dark:text-gray-400 transition-colors duration-300;
+    @apply text-gray-600 dark:text-gray-400 transition-colors duration-300;
+  }
+
+  /* Enhanced image visibility */
+  .image-container {
+    @apply relative overflow-hidden rounded-lg shadow-md bg-white dark:bg-zinc-800 transition-all duration-300;
+  }
+
+  .image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300;
+  }
+
+  /* Better text contrast for light mode */
+  .enhanced-text {
+    @apply text-gray-800 dark:text-gray-100 font-medium transition-colors duration-300;
+  }
+
+  .enhanced-subtext {
+    @apply text-gray-600 dark:text-gray-300 transition-colors duration-300;
+  }
+
+  /* Improved card styling for light mode */
+  .content-card {
+    @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/60 dark:border-zinc-700 rounded-xl shadow-lg dark:shadow-2xl backdrop-blur-sm transition-all duration-300 hover:shadow-xl dark:hover:shadow-2xl;
+  }
+
+  /* Better button contrast */
+  .action-button {
+    @apply bg-gray-900 hover:bg-gray-800 text-white dark:bg-white dark:text-black dark:hover:bg-gray-100 px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg;
   }
 }
 
