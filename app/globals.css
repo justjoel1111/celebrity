@@ -113,7 +113,7 @@
   
   /* FIXED: Enhanced luxury cards with proper light mode contrast */
   .luxury-card {
-    @apply bg-white/95 border border-gray-200/80 rounded-2xl shadow-xl backdrop-blur-sm 
+    @apply bg-white/95 border border-gray-300/60 rounded-2xl shadow-xl backdrop-blur-sm 
            dark:bg-zinc-900/95 dark:border-zinc-700/50 dark:shadow-2xl 
            transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1;
   }
@@ -231,7 +231,7 @@
     @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl p-8 shadow-xl dark:shadow-2xl 
            backdrop-blur-sm transition-all duration-300 hover:shadow-2xl 
-           dark:hover:shadow-3xl hover:scale-105 hover:-translate-y-2;
+           dark:hover:shadow-2xl hover:scale-105 hover:-translate-y-2;
   }
 
   /* FIXED: Enhanced service cards */
@@ -239,7 +239,7 @@
     @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl p-8 shadow-xl dark:shadow-2xl 
            backdrop-blur-sm transition-all duration-500 hover:shadow-2xl 
-           dark:hover:shadow-3xl hover:scale-105 hover:-translate-y-3 group;
+           dark:hover:shadow-2xl hover:scale-105 hover:-translate-y-3 group;
   }
 
   /* Enhanced form styles */
@@ -283,7 +283,7 @@
     @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl shadow-xl dark:shadow-2xl 
            backdrop-blur-sm transition-all duration-300 hover:shadow-2xl 
-           dark:hover:shadow-3xl hover:scale-[1.02] hover:-translate-y-1;
+           dark:hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1;
   }
 
   /* Celebrity cards */
@@ -291,7 +291,7 @@
     @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl overflow-hidden shadow-xl 
            dark:shadow-2xl backdrop-blur-sm transition-all duration-300 
-           hover:shadow-2xl dark:hover:shadow-3xl hover:scale-105 
+           hover:shadow-2xl dark:hover:shadow-2xl hover:scale-105 
            hover:-translate-y-2 group;
   }
 
@@ -300,7 +300,7 @@
     @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl p-8 shadow-xl dark:shadow-2xl 
            backdrop-blur-sm transition-all duration-300 hover:shadow-2xl 
-           dark:hover:shadow-3xl hover:scale-[1.02];
+           dark:hover:shadow-2xl hover:scale-[1.02];
   }
 
   /* Loading states */
