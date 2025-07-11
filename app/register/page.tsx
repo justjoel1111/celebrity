@@ -247,7 +247,7 @@ export default function RegisterPage() {
                       onCheckedChange={(checked) => setAgreeToTerms(checked as boolean)}
                     />
                     <Label htmlFor="terms" className="text-sm text-gray-600 dark:text-gray-300">
-                      I agree to the <Link href="/terms" className="text-yellow-600 hover:text-yellow-500">Terms of Service</Link> and <Link href="/privacy" className="text-yellow-600 hover:text-yellow-500">Privacy Policy</Link>
+                      I agree to the <Link href="/terms" className="text-yellow-600 hover:text-yellow-500">Terms of Service</Link> and <Link href="/privacy" className=\"text-yellow-600 hover:text-yellow-500">Privacy Policy</Link>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3">
