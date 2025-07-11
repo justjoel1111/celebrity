@@ -100,25 +100,25 @@
     @apply bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent;
   }
   
-  /* Improved glass effects with better light mode support */
+  /* FIXED: Improved glass effects with proper light mode support */
   .glass-effect {
-    @apply bg-white/95 backdrop-blur-xl border border-gray-200/80 shadow-2xl 
+    @apply bg-white/90 backdrop-blur-xl border border-gray-200/80 shadow-xl 
            dark:bg-black/40 dark:border-white/10 dark:shadow-white/5;
   }
   
   .glass-effect-light {
-    @apply bg-white/98 backdrop-blur-xl border border-gray-300/60 shadow-xl 
+    @apply bg-white/95 backdrop-blur-xl border border-gray-300/60 shadow-xl 
            dark:bg-black/30 dark:border-white/20 dark:shadow-white/10;
   }
   
-  /* Enhanced luxury cards with proper light mode contrast */
+  /* FIXED: Enhanced luxury cards with proper light mode contrast */
   .luxury-card {
-    @apply bg-white/98 border border-gray-300/60 rounded-2xl shadow-xl backdrop-blur-sm 
+    @apply bg-white/95 border border-gray-200/80 rounded-2xl shadow-xl backdrop-blur-sm 
            dark:bg-zinc-900/95 dark:border-zinc-700/50 dark:shadow-2xl 
            transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1;
   }
   
-  /* Improved premium buttons */
+  /* FIXED: Improved premium buttons */
   .premium-button {
     @apply bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold 
            px-8 py-4 rounded-xl hover:from-yellow-500 hover:to-yellow-700 
@@ -133,7 +133,7 @@
            transform hover:-translate-y-1 bg-transparent;
   }
 
-  /* Enhanced page backgrounds with better light mode support */
+  /* FIXED: Enhanced page backgrounds with proper light mode support */
   .page-background {
     @apply bg-gradient-to-br from-gray-50 via-white to-gray-100 
            dark:from-black dark:via-zinc-900 dark:to-black 
@@ -141,60 +141,58 @@
   }
 
   .section-background {
-    @apply bg-gradient-to-br from-white via-gray-50/30 to-white 
+    @apply bg-gradient-to-br from-white via-gray-50/50 to-white 
            dark:from-zinc-900 dark:via-black dark:to-zinc-900 
            transition-colors duration-300;
   }
 
   .section-background-alt {
-    @apply bg-gradient-to-br from-gray-50/50 via-white to-gray-50/50 
+    @apply bg-gradient-to-br from-gray-50/80 via-white to-gray-50/80 
            dark:from-black dark:via-zinc-900 dark:to-black 
            transition-colors duration-300;
   }
 
-  /* Improved text classes with better contrast */
+  /* FIXED: Improved text classes with better contrast for light mode */
   .text-primary {
     @apply text-gray-900 dark:text-white transition-colors duration-300 
-           font-semibold contrast-more:text-black contrast-more:dark:text-white;
+           font-semibold;
   }
 
   .text-secondary {
-    @apply text-gray-700 dark:text-gray-200 transition-colors duration-300 
-           contrast-more:text-gray-800 contrast-more:dark:text-gray-100;
+    @apply text-gray-700 dark:text-gray-200 transition-colors duration-300;
   }
 
   .text-muted {
-    @apply text-gray-600 dark:text-gray-300 transition-colors duration-300 
-           contrast-more:text-gray-700 contrast-more:dark:text-gray-200;
+    @apply text-gray-600 dark:text-gray-300 transition-colors duration-300;
   }
 
-  /* Light mode specific improvements */
+  /* FIXED: Light mode specific improvements */
   .light-mode-text {
-    @apply text-gray-900 font-semibold contrast-more:text-black;
+    @apply text-gray-900 font-semibold;
   }
 
   .light-mode-subtext {
-    @apply text-gray-700 font-medium contrast-more:text-gray-800;
+    @apply text-gray-700 font-medium;
   }
 
   .light-mode-muted {
-    @apply text-gray-600 contrast-more:text-gray-700;
+    @apply text-gray-600;
   }
 
   /* Dark mode specific improvements */
   .dark-mode-text {
-    @apply dark:text-white dark:font-medium contrast-more:dark:text-white;
+    @apply dark:text-white dark:font-medium;
   }
 
   .dark-mode-subtext {
-    @apply dark:text-gray-200 contrast-more:dark:text-gray-100;
+    @apply dark:text-gray-200;
   }
 
   .dark-mode-muted {
-    @apply dark:text-gray-300 contrast-more:dark:text-gray-200;
+    @apply dark:text-gray-300;
   }
 
-  /* Enhanced responsive design */
+  /* FIXED: Enhanced responsive design */
   .responsive-container {
     @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
@@ -216,7 +214,7 @@
     @apply px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16;
   }
 
-  /* Enhanced hero section */
+  /* FIXED: Enhanced hero section */
   .hero-background {
     @apply relative min-h-screen flex items-center justify-center overflow-hidden 
            bg-gradient-to-br from-gray-50 via-white to-gray-100 
@@ -224,21 +222,21 @@
   }
 
   .hero-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-white/95 via-white/60 to-white/30 
-           dark:from-black/95 dark:via-black/60 dark:to-black/30;
+    @apply absolute inset-0 bg-gradient-to-t from-white/90 via-white/70 to-white/50 
+           dark:from-black/90 dark:via-black/70 dark:to-black/50;
   }
 
-  /* Enhanced stats cards */
+  /* FIXED: Enhanced stats cards */
   .stats-card {
-    @apply bg-white/98 dark:bg-zinc-900/95 border border-gray-300/60 
+    @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl p-8 shadow-xl dark:shadow-2xl 
            backdrop-blur-sm transition-all duration-300 hover:shadow-2xl 
            dark:hover:shadow-3xl hover:scale-105 hover:-translate-y-2;
   }
 
-  /* Enhanced service cards */
+  /* FIXED: Enhanced service cards */
   .service-card {
-    @apply bg-white/98 dark:bg-zinc-900/95 border border-gray-300/60 
+    @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl p-8 shadow-xl dark:shadow-2xl 
            backdrop-blur-sm transition-all duration-500 hover:shadow-2xl 
            dark:hover:shadow-3xl hover:scale-105 hover:-translate-y-3 group;
@@ -282,7 +280,7 @@
 
   /* Enhanced cards */
   .enhanced-card {
-    @apply bg-white/98 dark:bg-zinc-900/95 border border-gray-300/60 
+    @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl shadow-xl dark:shadow-2xl 
            backdrop-blur-sm transition-all duration-300 hover:shadow-2xl 
            dark:hover:shadow-3xl hover:scale-[1.02] hover:-translate-y-1;
@@ -290,7 +288,7 @@
 
   /* Celebrity cards */
   .celebrity-card {
-    @apply bg-white/98 dark:bg-zinc-900/95 border border-gray-300/60 
+    @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl overflow-hidden shadow-xl 
            dark:shadow-2xl backdrop-blur-sm transition-all duration-300 
            hover:shadow-2xl dark:hover:shadow-3xl hover:scale-105 
@@ -299,7 +297,7 @@
 
   /* Testimonial cards */
   .testimonial-card {
-    @apply bg-white/98 dark:bg-zinc-900/95 border border-gray-300/60 
+    @apply bg-white/95 dark:bg-zinc-900/95 border border-gray-200/80 
            dark:border-zinc-700/50 rounded-2xl p-8 shadow-xl dark:shadow-2xl 
            backdrop-blur-sm transition-all duration-300 hover:shadow-2xl 
            dark:hover:shadow-3xl hover:scale-[1.02];
@@ -376,7 +374,7 @@
   animation: shimmer 1.5s infinite;
 }
 
-/* Responsive breakpoints */
+/* FIXED: Responsive breakpoints with better zoom handling */
 @media (max-width: 640px) {
   .responsive-padding {
     @apply px-4 py-8;
@@ -416,6 +414,19 @@
   
   .responsive-text {
     @apply text-lg;
+  }
+}
+
+/* FIXED: Better zoom level handling */
+@media (min-resolution: 1.25dppx) {
+  .responsive-container {
+    @apply max-w-6xl;
+  }
+}
+
+@media (min-resolution: 1.5dppx) {
+  .responsive-container {
+    @apply max-w-5xl;
   }
 }
 

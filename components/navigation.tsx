@@ -100,10 +100,10 @@ export function Navigation() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuItem>
-                  <Link href="/login" className="w-full">Login</Link>
+                  <Link href="/login" className="w-full">Sign In</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="/register" className="w-full">Register</Link>
+                  <Link href="/register" className="w-full">Sign Up</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href="/dashboard" className="w-full">Dashboard</Link>
