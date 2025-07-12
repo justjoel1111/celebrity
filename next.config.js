@@ -2,6 +2,7 @@
 const nextConfig = {
   // Comment out static export for now to fix the build
   // output: 'export',
+  optimizeFonts: false,
   compiler: {
     swcMinify: true,
   },
