@@ -2,7 +2,9 @@
 const nextConfig = {
   // Comment out static export for now to fix the build
   // output: 'export',
-  optimizeFonts: false,
+  httpAgentOptions: {
+    timeout: 60000,
+  },
   compiler: {
     swcMinify: true,
   },
